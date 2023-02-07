@@ -1,0 +1,46 @@
+mysql> select * FROM Opintojakso;
++---------------+--------------------------+-------+---------+
+| idOpintojakso | Nimi                     | Koodi | Laajuus |
++---------------+--------------------------+-------+---------+
+|             1 | Tietokannat              | T2000 |       3 |
+|             2 | Liike-elaman tapatietous | T2001 |       3 |
+|             3 | Fysiikka 1               | T2002 |       3 |
+|             4 | Fysiikka 2               | T2003 |       3 |
+|             6 | Kellarihumppa            | T2004 |       5 |
+|             7 | Ruotsin kieli            | T2005 |       3 |
+|             8 | Biologia ja tietokoneet  | T2006 |       6 |
++---------------+--------------------------+-------+---------+
+7 rows in set (0.00 sec)
+mysql> select * FROM Opiskelija;
++--------------+---------+----------+------------------+--------------+
+| idOpiskelija | Etunimi | Sukunimi | Osoite           | Luokkatunnus |
++--------------+---------+----------+------------------+--------------+
+|            1 | Aku     | Ankka    | Paratiisitie 13  | TVT22SPL     |
+|            2 | Roope   | Ankka    | Ankankatu 47     | TVT22SPL     |
+|            3 | Iines   | Ankka    | Sorsakatu 03     | TVT22SPO     |
+|            4 | Hessu   | Hopo     | Koppikuja 02     | TVT20PSL     |
+|            5 | Mikki   | Hiiri    | Koppikuja 03     | TVT20PSL     |
+|            6 | Otto    | Glottkin | Messinkilinna 01 | TVT19NRG     |
+|            7 | Ethrac  | Glottkin | Messinkilinna 01 | TVT19NRG     |
+|            8 | Ghurk   | Glottkin | Messinkilinna 01 | TVT19NRG     |
++--------------+---------+----------+------------------+--------------+
+8 rows in set (0.00 sec)
+mysql> select etunimi,sukunimi,arvosana,paivays,nimi from Arviointi JOIN Opiskelija on Opiskelija.idOpiskelija = Arviointi.idOpiskelija JOIN Opintojakso on Opintojakso.idOpintojakso = Arviointi.idOpintojakso;
++---------+----------+----------+------------+--------------------------+
+| etunimi | sukunimi | arvosana | paivays    | nimi                     |
++---------+----------+----------+------------+--------------------------+
+| Aku     | Ankka    | 1        | 2023-02-07 | Tietokannat              |
+| Aku     | Ankka    | 1        | 2023-02-07 | Fysiikka 1               |
+| Aku     | Ankka    | 0        | 2023-02-07 | Ruotsin kieli            |
+| Aku     | Ankka    | 4        | 2023-02-07 | Tietokannat              |
+| Roope   | Ankka    | 4        | 2023-02-07 | Tietokannat              |
+| Roope   | Ankka    | 4        | 2023-02-07 | Liike-elaman tapatietous |
+| Roope   | Ankka    | 4        | 2023-02-07 | Fysiikka 2               |
+| Iines   | Ankka    | 4        | 2023-02-07 | Kellarihumppa            |
+| Iines   | Ankka    | 0        | 2023-02-07 | Ruotsin kieli            |
+| Hessu   | Hopo     | 0        | 2023-02-07 | Ruotsin kieli            |
+| Hessu   | Hopo     | 2        | 2023-02-07 | Biologia ja tietokoneet  |
+| Mikki   | Hiiri    | 5        | 2023-02-07 | Biologia ja tietokoneet  |
+| Ghurk   | Glottkin | 5        | 2023-02-07 | Ruotsin kieli            |
++---------+----------+----------+------------+--------------------------+
+13 rows in set (0.00 sec)

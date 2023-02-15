@@ -1,0 +1,30 @@
+CREATE PROCEDURE `lisaaOpintosuoritus` (
+IN etunimi VARCHAR(45),
+IN sukunimi VARCHAR(45),
+IN koodi VARCHAR(45),
+IN arvosana VARCHAR(45))
+
+aliohjelma:BEGIN
+DECLARE id_opiskelija INT default 0;
+DECLARE id_opintojakso INT default 0;
+  
+  SELECT idOpiskelija INTO id_opiskelija FROM Opiskelija WHERE etunimi = Etunimi AND sukunimi = Sukunimi LIMIT 1;
+  SELECT idOpintojakso INTO id_opintojakso FROM Opintojakso WHERE koodi = Koodi LIMIT 1;
+  
+  IF id_opiskelija =0 THEN
+    SELECT 'Opiskelijaa ei löytynyt';
+    leave aliohjelma;
+    end if;
+  IF id_opintojakso =0 THEN
+    SELECT  'Kurssia ei löytynyt';
+    leave aliohjelma;
+   end if; 
+  IF arvosana < '0' OR arvosana > '5' THEN
+   SELECT  'Virheellinen arvosana';
+   leave aliohjelma;
+  end if; 
+  
+    INSERT INTO arviointi  
+    VALUES (null,arvosana,CURDATE(),id_opiskelija, id_opintojakso);
+   
+END
